@@ -1,6 +1,7 @@
 ﻿using AbySalto.Mid.Domain.Entities;
 using AbySalto.Mid.Domain.Seeders;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace AbySalto.Mid.Infrastructure.Database
 {
@@ -17,6 +18,40 @@ namespace AbySalto.Mid.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.Dimensions)
+                .WithOne(a => a.Product)
+                .HasForeignKey<Dimensions>(c => c.ProductId);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.Meta)
+                .WithOne(a => a.Product)
+                .HasForeignKey<Meta>(c => c.ProductId);
+
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.Product)
+                .WithMany(p => p.Reviews)
+                .HasForeignKey(r => r.ProductId);
+
+            modelBuilder.Entity<CartProduct>()
+                .HasKey(ci => new { ci.CartId, ci.ProductId });
+
+            modelBuilder.Entity<CartProduct>()
+                .HasOne(ci => ci.Product)
+                .WithMany(p => p.CartProducts)
+                .HasForeignKey(ci => ci.ProductId);
+
+            modelBuilder.Entity<CartProduct>()
+                .HasOne(ci => ci.Cart)
+                .WithMany(p => p.Products)
+                .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Cart)
+                .WithOne(c => c.User)
+                .HasForeignKey<Cart>(c => c.UserId);
+
+
             modelBuilder.Entity<User>().HasData(UserSeeder.Data);
         }
     }

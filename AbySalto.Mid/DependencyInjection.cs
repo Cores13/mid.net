@@ -16,11 +16,6 @@ namespace AbySalto.Mid
     {
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
-            //services.AddControllers().AddNewtonsoftJson(options =>
-            //{
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            //});
             services.AddOpenApi();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>

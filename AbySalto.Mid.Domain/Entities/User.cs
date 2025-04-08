@@ -33,5 +33,7 @@ namespace AbySalto.Mid.Domain.Entities
         public UserRoleEnum? Role { get; set; }
 
         public UserStatusEnum? Status { get; set; }
+
+        public Cart Cart { get; set; }
     }
 }

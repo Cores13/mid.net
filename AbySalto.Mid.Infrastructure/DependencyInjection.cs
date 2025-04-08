@@ -18,7 +18,8 @@ namespace AbySalto.Mid.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDatabase(configuration).AddServices();
+            services.AddDatabase(configuration)
+                .AddServices();
             return services;
         }
 
@@ -26,10 +27,11 @@ namespace AbySalto.Mid.Infrastructure
         {
             // Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             // Services
             services.AddScoped<IValidationService, ValidationService>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IVerificationCodeService, VerificationCodeService>();
