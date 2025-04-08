@@ -17,7 +17,7 @@ namespace AbySalto.Mid.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetAllProducts(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
             try
             {

@@ -19,17 +19,14 @@ namespace AbySalto.Mid.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDatabase(configuration)
-                .AddServices();
+                .AddServices()
+                .AddRepositories()
+                .AddProviders();
             return services;
         }
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
-            // Repositories
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-
             // Services
             services.AddScoped<IValidationService, ValidationService>();
             services.AddScoped<IPasswordService, PasswordService>();
@@ -37,9 +34,33 @@ namespace AbySalto.Mid.Infrastructure
             services.AddScoped<IVerificationCodeService, VerificationCodeService>();
             services.AddScoped<IEmailService, EmailService>();
 
+            services.AddHttpClient<IExternalApiService, ExternalApiService>(client =>
+            {
+                client.BaseAddress = new Uri("https://dummyjson.com/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
+            return services;
+        }
+        private static IServiceCollection AddProviders(this IServiceCollection services)
+        {
+
             // Providers
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IJwtProvider, JwtProvider>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IDimensionsRepository, DimensionsRepository>();
+            services.AddScoped<IMetaRepository, MetaRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             return services;
         }
@@ -57,8 +78,6 @@ namespace AbySalto.Mid.Infrastructure
                     }
                 );
                 options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
-
-                //).EnableSensitiveDataLogging();
             });
             return services;
         }

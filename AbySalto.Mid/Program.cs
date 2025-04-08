@@ -1,7 +1,6 @@
 
 using AbySalto.Mid.Application;
 using AbySalto.Mid.Infrastructure;
-using AbySalto.Mid.Infrastructure.Database;
 using AbySalto.Mid.Middleware;
 using Serilog;
 
@@ -15,8 +14,8 @@ namespace AbySalto.Mid
 
             builder.Services
                 .AddPresentation()
-                .AddApplication()
-                .AddInfrastructure(builder.Configuration);
+                .AddInfrastructure(builder.Configuration)
+                .AddApplication();
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();

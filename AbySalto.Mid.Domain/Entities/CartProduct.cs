@@ -14,5 +14,8 @@ namespace AbySalto.Mid.Domain.Entities
 
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
+        public int Quantity { get; set; }
+        public double Total { get; set; }
+        public double DiscountTotal { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AbySalto.Mid.Domain.Enums;
 using AbySalto.Mid.Domain.Primitives;
-using System.Text.Json.Serialization;
 
 namespace AbySalto.Mid.Domain.Entities
 {

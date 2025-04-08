@@ -8,21 +8,18 @@ using AbySalto.Mid.Domain.DTOs.Paging;
 
 namespace AbySalto.Mid.Infrastructure.Repository
 {
-    public class ProductRepository : Repository<Product>, IProductRepository
+    public class CartRepository : Repository<Cart>, ICartRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductRepository(ApplicationDbContext context) : base(context)
+        public CartRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<PagedResponse<ProductResponseDto?>> GetAllPaged(PagedRequest<string> pagedQuery)
+        public async Task<PagedResponse<CartResponseDto?>> GetAllPaged(PagedRequest<string> pagedQuery)
         {
-            var query = _context.Products
-                .Include(x => x.Dimensions)
-                .Include(x => x.Reviews)
-                .Include(x => x.Meta)
+            var query = _context.Carts
                 .AsQueryable();
 
             var totalResults = await query.CountAsync();
@@ -31,7 +28,7 @@ namespace AbySalto.Mid.Infrastructure.Repository
 
             var results = await query.ToListAsync();
 
-            return new PagedResponse<ProductResponseDto?>
+            return new PagedResponse<CartResponseDto?>
             {
                 Results = results.ToDto(),
                 Page = pagedQuery.Page,
@@ -40,13 +37,9 @@ namespace AbySalto.Mid.Infrastructure.Repository
             };
         }
 
-        public async Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<Cart?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _context.Products.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-        }
-        public async Task<Product?> GetByApiIdAsync(int id, CancellationToken cancellationToken = default)
-        {
-            return await _context.Products.SingleOrDefaultAsync(x => x.ApiId == id, cancellationToken);
+            return await _context.Carts.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

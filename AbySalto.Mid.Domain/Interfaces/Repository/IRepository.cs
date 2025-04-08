@@ -8,6 +8,7 @@ namespace AbySalto.Mid.Domain.Interfaces.Repository
         T Get(Expression<Func<T, bool>>? filter, string? includeProperties = null);
         bool Any(Expression<Func<T, bool>> filter);
         void Add(T entity);
+        void AddRange(List<T> entity);
         void Remove(T entity);
         void GetAddedEntity(T entity);
     }

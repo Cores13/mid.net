@@ -42,6 +42,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ApiId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -53,14 +54,11 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sku = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
-                    DimensionsId = table.Column<int>(type: "int", nullable: false),
                     WarrantyInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShippingInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AvailabilityStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: false),
                     ReturnPolicy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MinimumOrderQuantity = table.Column<int>(type: "int", nullable: false),
-                    MetaId = table.Column<int>(type: "int", nullable: false),
                     Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Images = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -77,6 +75,9 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 {
                     CartId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    DiscountTotal = table.Column<double>(type: "float", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -128,8 +129,6 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QrCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
@@ -178,14 +177,14 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 8, 17, 24, 18, 493, DateTimeKind.Utc).AddTicks(6663), new DateTime(2025, 4, 8, 17, 24, 18, 493, DateTimeKind.Utc).AddTicks(8391), new DateTime(2025, 4, 8, 17, 24, 18, 493, DateTimeKind.Utc).AddTicks(8937), new DateTime(2025, 4, 8, 17, 24, 18, 493, DateTimeKind.Utc).AddTicks(9314), new DateTime(2025, 4, 8, 17, 24, 18, 493, DateTimeKind.Utc).AddTicks(6934) });
+                values: new object[] { new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1367), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(3784), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4202), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4674), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1700) });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 8, 17, 24, 18, 494, DateTimeKind.Utc).AddTicks(330), new DateTime(2025, 4, 8, 17, 24, 18, 494, DateTimeKind.Utc).AddTicks(333), new DateTime(2025, 4, 8, 17, 24, 18, 494, DateTimeKind.Utc).AddTicks(334), new DateTime(2025, 4, 8, 17, 24, 18, 494, DateTimeKind.Utc).AddTicks(335), new DateTime(2025, 4, 8, 17, 24, 18, 494, DateTimeKind.Utc).AddTicks(331) });
+                values: new object[] { new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5844), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5845), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5846), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartProduct_ProductId",

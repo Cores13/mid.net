@@ -19,6 +19,10 @@ namespace AbySalto.Mid.Infrastructure.Repository
         {
             dbSet.Add(entity);
         }
+        public virtual void AddRange(List<T> entity)
+        {
+            dbSet.AddRange(entity);
+        }
 
         public bool Any(Expression<Func<T, bool>> filter)
         {

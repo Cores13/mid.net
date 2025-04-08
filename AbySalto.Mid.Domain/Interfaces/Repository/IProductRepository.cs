@@ -9,5 +9,7 @@ namespace AbySalto.Mid.Domain.Interfaces.Repository
         Task<PagedResponse<ProductResponseDto?>> GetAllPaged(PagedRequest<string> pagedQuery);
 
         Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+
+        Task<Product?> GetByApiIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }
