@@ -52,7 +52,7 @@ Pre nego što pokrenete projekat, uvjerite se da imate sljedeće instalirano na 
 Klonirajte repozitorij sa GitHub-a koristeći sljedeću komandu:
 
 ```bash
-git clone https://github.com/your-repository-url.git
+git@github.com:Cores13/mid.net.git
 ```
 
 ## 2. Konfiguracija baze podataka
