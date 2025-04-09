@@ -21,7 +21,7 @@ namespace AbySalto.Mid.Infrastructure.Services
 
             var json = await response.Content.ReadAsStringAsync();
 
-            var res = JsonSerializer.Deserialize<ApiProductResponse>(json, new JsonSerializerOptions
+            var res = JsonSerializer.Deserialize<ApiProductResponseDto>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -33,7 +33,7 @@ namespace AbySalto.Mid.Infrastructure.Services
 
                 json = await response.Content.ReadAsStringAsync();
 
-                res = JsonSerializer.Deserialize<ApiProductResponse>(json, new JsonSerializerOptions
+                res = JsonSerializer.Deserialize<ApiProductResponseDto>(json, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });
@@ -49,12 +49,27 @@ namespace AbySalto.Mid.Infrastructure.Services
 
             var json = await response.Content.ReadAsStringAsync();
 
-            var res = JsonSerializer.Deserialize<ApiProductResponse>(json, new JsonSerializerOptions
+            var res = JsonSerializer.Deserialize<ApiProductResponseDto>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
 
             return res.Total;
+        }
+
+        public async Task<Product> GetProductById(int id)
+        {
+            var response = await _httpClient.GetAsync($"products/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var res = JsonSerializer.Deserialize<Product>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return res;
         }
     }
 }

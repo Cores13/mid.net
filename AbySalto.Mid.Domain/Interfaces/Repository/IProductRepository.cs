@@ -11,5 +11,7 @@ namespace AbySalto.Mid.Domain.Interfaces.Repository
         Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
         Task<Product?> GetByApiIdAsync(int id, CancellationToken cancellationToken = default);
+
+        void AddToFavorites(UserFavorite entity);
     }
 }

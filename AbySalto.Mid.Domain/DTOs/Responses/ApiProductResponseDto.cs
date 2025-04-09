@@ -3,7 +3,7 @@ using AbySalto.Mid.Domain.Entities;
 
 namespace AbySalto.Mid.Domain.DTOs.Responses
 {
-    public class ApiProductResponse
+    public class ApiProductResponseDto
     {
         public List<Product?> Products { get; set; }
         public int Total { get; set; }

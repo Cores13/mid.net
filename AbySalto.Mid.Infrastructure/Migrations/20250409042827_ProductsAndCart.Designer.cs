@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbySalto.Mid.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250408212540_ProductsAndCart")]
+    [Migration("20250409042827_ProductsAndCart")]
     partial class ProductsAndCart
     {
         /// <inheritdoc />
@@ -170,7 +170,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ApiId")
+                    b.Property<int>("ApiId")
                         .HasColumnType("int");
 
                     b.Property<string>("AvailabilityStatus")
@@ -178,7 +178,6 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Brand")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")
@@ -361,33 +360,33 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1367),
+                            CreatedOn = new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7529),
                             Email = "admin@authentication.com",
-                            EmailVerifiedAt = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(3784),
+                            EmailVerifiedAt = new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9176),
                             Name = "Administrator",
                             PasswordHash = new byte[] { 35, 90, 244, 18, 43, 21, 195, 38, 253, 159, 107, 4, 55, 18, 200, 156, 84, 209, 241, 56, 27, 72, 90, 53, 220, 177, 39, 238, 117, 222, 23, 141, 154, 189, 55, 192, 113, 129, 205, 207, 226, 181, 138, 80, 84, 166, 226, 153, 64, 24, 39, 131, 91, 56, 154, 150, 210, 129, 163, 197, 230, 210, 1, 184 },
                             PasswordSalt = new byte[] { 141, 249, 58, 0, 174, 228, 48, 60, 70, 120, 31, 142, 153, 188, 235, 210, 202, 154, 79, 198, 74, 194, 78, 154, 133, 112, 30, 189, 171, 202, 164, 9, 106, 78, 229, 131, 106, 18, 44, 114, 165, 89, 98, 17, 156, 31, 248, 142, 103, 98, 52, 176, 27, 154, 19, 178, 8, 31, 81, 183, 114, 237, 44, 80, 213, 69, 239, 33, 27, 95, 113, 116, 150, 169, 203, 208, 49, 84, 57, 29, 132, 148, 75, 131, 223, 59, 207, 147, 37, 91, 50, 190, 55, 204, 95, 113, 39, 201, 179, 191, 245, 184, 61, 146, 8, 47, 145, 224, 10, 240, 216, 97, 159, 135, 199, 201, 113, 50, 57, 45, 232, 72, 16, 138, 86, 166, 101, 64 },
-                            RefreshTokenExpiryTime = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4202),
-                            ResetPasswordExpiry = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4674),
+                            RefreshTokenExpiryTime = new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9602),
+                            ResetPasswordExpiry = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(18),
                             Role = 1,
                             Status = 1,
-                            UpdatedOn = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1700),
+                            UpdatedOn = new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7863),
                             Username = "Administrator"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842),
+                            CreatedOn = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1185),
                             Email = "user@authentication.com",
-                            EmailVerifiedAt = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5844),
+                            EmailVerifiedAt = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1188),
                             Name = "User",
                             PasswordHash = new byte[] { 35, 90, 244, 18, 43, 21, 195, 38, 253, 159, 107, 4, 55, 18, 200, 156, 84, 209, 241, 56, 27, 72, 90, 53, 220, 177, 39, 238, 117, 222, 23, 141, 154, 189, 55, 192, 113, 129, 205, 207, 226, 181, 138, 80, 84, 166, 226, 153, 64, 24, 39, 131, 91, 56, 154, 150, 210, 129, 163, 197, 230, 210, 1, 184 },
                             PasswordSalt = new byte[] { 141, 249, 58, 0, 174, 228, 48, 60, 70, 120, 31, 142, 153, 188, 235, 210, 202, 154, 79, 198, 74, 194, 78, 154, 133, 112, 30, 189, 171, 202, 164, 9, 106, 78, 229, 131, 106, 18, 44, 114, 165, 89, 98, 17, 156, 31, 248, 142, 103, 98, 52, 176, 27, 154, 19, 178, 8, 31, 81, 183, 114, 237, 44, 80, 213, 69, 239, 33, 27, 95, 113, 116, 150, 169, 203, 208, 49, 84, 57, 29, 132, 148, 75, 131, 223, 59, 207, 147, 37, 91, 50, 190, 55, 204, 95, 113, 39, 201, 179, 191, 245, 184, 61, 146, 8, 47, 145, 224, 10, 240, 216, 97, 159, 135, 199, 201, 113, 50, 57, 45, 232, 72, 16, 138, 86, 166, 101, 64 },
-                            RefreshTokenExpiryTime = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5845),
-                            ResetPasswordExpiry = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5846),
+                            RefreshTokenExpiryTime = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1189),
+                            ResetPasswordExpiry = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1190),
                             Role = 2,
                             Status = 1,
-                            UpdatedOn = new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842),
+                            UpdatedOn = new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1186),
                             Username = "User"
                         });
                 });
@@ -414,6 +413,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     b.HasOne("AbySalto.Mid.Domain.Entities.Product", "Product")
                         .WithMany("CartProducts")
                         .HasForeignKey("ProductId")
+                        .HasPrincipalKey("ApiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -427,6 +427,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     b.HasOne("AbySalto.Mid.Domain.Entities.Product", "Product")
                         .WithOne("Dimensions")
                         .HasForeignKey("AbySalto.Mid.Domain.Entities.Dimensions", "ProductId")
+                        .HasPrincipalKey("AbySalto.Mid.Domain.Entities.Product", "ApiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -438,6 +439,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     b.HasOne("AbySalto.Mid.Domain.Entities.Product", "Product")
                         .WithOne("Meta")
                         .HasForeignKey("AbySalto.Mid.Domain.Entities.Meta", "ProductId")
+                        .HasPrincipalKey("AbySalto.Mid.Domain.Entities.Product", "ApiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -449,6 +451,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     b.HasOne("AbySalto.Mid.Domain.Entities.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
+                        .HasPrincipalKey("ApiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

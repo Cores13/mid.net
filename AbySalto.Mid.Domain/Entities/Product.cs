@@ -26,6 +26,7 @@ namespace AbySalto.Mid.Domain.Entities
         public Meta Meta { get; set; }
         public string Thumbnail { get; set; }
         public virtual ICollection<CartProduct> CartProducts { get; set; }
+        public virtual ICollection<UserFavorite> UserFavorites { get; set; }
         public virtual List<string> Images { get; set; }
     }
 }

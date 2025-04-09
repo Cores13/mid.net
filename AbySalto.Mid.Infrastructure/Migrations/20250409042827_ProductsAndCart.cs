@@ -42,7 +42,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApiId = table.Column<int>(type: "int", nullable: true),
+                    ApiId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -51,7 +51,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                     Rating = table.Column<double>(type: "float", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sku = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     WarrantyInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -67,6 +67,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.UniqueConstraint("AK_Products_ApiId", x => x.ApiId);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,7 +96,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         name: "FK_CartProduct_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "ApiId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -119,7 +120,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         name: "FK_Dimensions_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "ApiId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -142,7 +143,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         name: "FK_Metas_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "ApiId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -168,7 +169,7 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         name: "FK_Reviews_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "ApiId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -177,14 +178,14 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1367), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(3784), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4202), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(4674), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(1700) });
+                values: new object[] { new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7529), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9176), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9602), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(18), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7863) });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5844), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5845), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5846), new DateTime(2025, 4, 8, 21, 25, 39, 534, DateTimeKind.Utc).AddTicks(5842) });
+                values: new object[] { new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1185), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1188), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1189), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1190), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1186) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartProduct_ProductId",

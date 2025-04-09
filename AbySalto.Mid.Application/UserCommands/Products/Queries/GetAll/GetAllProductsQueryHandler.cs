@@ -67,15 +67,15 @@ namespace AbySalto.Mid.Application.UserCommands.Products.Queries.GetAll
                         var existingProduct = await _productRepository.GetByApiIdAsync((int)product.ApiId, cancellationToken);
 
                         // Prepare related entities
-                        product.Meta.ProductId = (int)existingProduct.Id;
+                        product.Meta.ProductId = (int)existingProduct.ApiId;
                         metaToAdd.Add(product.Meta);
 
-                        product.Dimensions.ProductId = (int)existingProduct.Id;
+                        product.Dimensions.ProductId = (int)existingProduct.ApiId;
                         dimensionsToAdd.Add(product.Dimensions);
 
                         foreach (var review in product.Reviews)
                         {
-                            review.ProductId = (int)existingProduct.Id;
+                            review.ProductId = (int)existingProduct.ApiId;
                             reviewsToAdd.Add(review);
                         }
                     }

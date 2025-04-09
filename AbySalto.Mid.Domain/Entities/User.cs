@@ -34,5 +34,6 @@ namespace AbySalto.Mid.Domain.Entities
         public UserStatusEnum? Status { get; set; }
 
         public Cart Cart { get; set; }
+        public virtual IEnumerable<UserFavorite> Favorites { get; set; }
     }
 }

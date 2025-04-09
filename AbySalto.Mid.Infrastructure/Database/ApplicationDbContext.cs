@@ -15,23 +15,28 @@ namespace AbySalto.Mid.Infrastructure.Database
         public virtual DbSet<Meta> Metas { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartProduct> CartProducts { get; set; }
+        public virtual DbSet<UserFavorite> UserFavorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>()
                 .HasOne(a => a.Dimensions)
                 .WithOne(a => a.Product)
-                .HasForeignKey<Dimensions>(c => c.ProductId);
+                .HasForeignKey<Dimensions>(c => c.ProductId)
+                .HasPrincipalKey<Product>(p => p.ApiId);
 
             modelBuilder.Entity<Product>()
                 .HasOne(a => a.Meta)
                 .WithOne(a => a.Product)
-                .HasForeignKey<Meta>(c => c.ProductId);
+                .HasForeignKey<Meta>(c => c.ProductId)
+                .HasPrincipalKey<Product>(p => p.ApiId);
 
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Product)
                 .WithMany(p => p.Reviews)
-                .HasForeignKey(r => r.ProductId);
+                .HasForeignKey(r => r.ProductId)
+                .HasPrincipalKey(p => p.ApiId);
 
             modelBuilder.Entity<CartProduct>()
                 .HasKey(ci => new { ci.CartId, ci.ProductId });
@@ -39,12 +44,24 @@ namespace AbySalto.Mid.Infrastructure.Database
             modelBuilder.Entity<CartProduct>()
                 .HasOne(ci => ci.Product)
                 .WithMany(p => p.CartProducts)
-                .HasForeignKey(ci => ci.ProductId);
+                .HasForeignKey(ci => ci.ProductId)
+                .HasPrincipalKey(p => p.ApiId);
 
             modelBuilder.Entity<CartProduct>()
                 .HasOne(ci => ci.Cart)
                 .WithMany(p => p.Products)
                 .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<UserFavorite>()
+                .HasOne(ci => ci.Product)
+                .WithMany(p => p.UserFavorites)
+                .HasForeignKey(ci => ci.ProductId)
+                .HasPrincipalKey(p => p.ApiId);
+
+            modelBuilder.Entity<UserFavorite>()
+                .HasOne(ci => ci.User)
+                .WithMany(u => u.Favorites)
+                .HasForeignKey(ci => ci.UserId);
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Cart)

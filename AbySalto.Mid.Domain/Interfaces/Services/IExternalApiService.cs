@@ -6,5 +6,6 @@ namespace AbySalto.Mid.Domain.Interfaces.Services
     {
         Task<List<Product>> GetProducts();
         Task<int> GetProductsCount();
+        Task<Product> GetProductById(int id);
     }
 }

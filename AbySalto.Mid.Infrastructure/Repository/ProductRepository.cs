@@ -42,11 +42,25 @@ namespace AbySalto.Mid.Infrastructure.Repository
 
         public async Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _context.Products.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return await _context.Products
+                .Include("Dimensions")
+                .Include("Reviews")
+                .Include("Meta")
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
+
         public async Task<Product?> GetByApiIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _context.Products.SingleOrDefaultAsync(x => x.ApiId == id, cancellationToken);
+            return await _context.Products
+                .Include("Dimensions")
+                .Include("Reviews")
+                .Include("Meta")
+                .SingleOrDefaultAsync(x => x.ApiId == id, cancellationToken);
+        }
+
+        public void AddToFavorites(UserFavorite entity)
+        {
+            _context.UserFavorites.Add(entity);
         }
     }
 }
