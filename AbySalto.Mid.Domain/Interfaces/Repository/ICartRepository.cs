@@ -9,5 +9,13 @@ namespace AbySalto.Mid.Domain.Interfaces.Repository
         Task<PagedResponse<CartResponseDto?>> GetAllPaged(PagedRequest<string> pagedQuery);
 
         Task<Cart?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+        
+        Task<Cart?> GetByUserIdAsync(int id, CancellationToken cancellationToken = default);
+        
+        void AddToCart(CartProduct cartItem);
+        
+        void RemoveFromCart(CartProduct cartItem);
+
+        Task<CartProduct?> GetProductFromCart(int productId, int cartId, CancellationToken cancellationToken = default);
     }
 }

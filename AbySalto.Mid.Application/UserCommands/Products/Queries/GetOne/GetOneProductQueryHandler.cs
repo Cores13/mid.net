@@ -4,7 +4,6 @@ using AbySalto.Mid.Application.UserCommands.Products.Queries.GetOne;
 using AbySalto.Mid.Domain.Core.Errors;
 using AbySalto.Mid.Domain.Core.Primitives;
 using AbySalto.Mid.Domain.DTOs.Responses;
-using AbySalto.Mid.Domain.Entities;
 using AbySalto.Mid.Domain.Interfaces.Repository;
 using AbySalto.Mid.Domain.Interfaces.Services;
 
@@ -23,7 +22,7 @@ namespace AbySalto.Mid.Application.UserCommands.Products.Queries.GetAll
 
         public async Task<Result<ProductResponseDto?>> Handle(GetOneProductQuery request, CancellationToken cancellationToken = default)
         {
-            var product = await _productRepository.GetByApiIdAsync(request.Id);
+            var product = await _productRepository.GetByApiIdAsync(request.Id, cancellationToken);
 
             if (product is null)
             {

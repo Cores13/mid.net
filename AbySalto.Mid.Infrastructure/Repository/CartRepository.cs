@@ -39,7 +39,33 @@ namespace AbySalto.Mid.Infrastructure.Repository
 
         public async Task<Cart?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _context.Carts.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return await _context.Carts
+                .Include(x => x.Products)
+                    .ThenInclude(x => x.Product)
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public async Task<Cart?> GetByUserIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Carts
+                .Include(x => x.Products)
+                    .ThenInclude(x => x.Product)
+                .SingleOrDefaultAsync(x => x.UserId == id, cancellationToken);
+        }
+
+        public void AddToCart(CartProduct cartItem)
+        {
+            _context.CartProducts.Add(cartItem);
+        }
+
+        public void RemoveFromCart(CartProduct cartItem)
+        {
+            _context.CartProducts.Remove(cartItem);
+        }
+
+        public async Task<CartProduct?> GetProductFromCart(int productId, int cartId, CancellationToken cancellationToken = default)
+        {
+            return await _context.CartProducts.SingleOrDefaultAsync(x => x.CartId == cartId && x.ProductId == productId, cancellationToken);
         }
     }
 }

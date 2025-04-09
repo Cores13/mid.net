@@ -1,5 +1,4 @@
 ﻿using AbySalto.Mid.Application.Abstractions.Messaging;
-using AbySalto.Mid.Application.UserCommands.Products.Commands.Create;
 using AbySalto.Mid.Domain.Core.Errors;
 using AbySalto.Mid.Domain.Core.Primitives;
 using AbySalto.Mid.Domain.DTOs.Responses;
@@ -7,7 +6,7 @@ using AbySalto.Mid.Domain.Entities;
 using AbySalto.Mid.Domain.Interfaces.Repository;
 using AbySalto.Mid.Domain.Interfaces.Services;
 
-namespace AbySalto.Mid.Application.UserCommands.Users.Commands.Create
+namespace AbySalto.Mid.Application.UserCommands.Products.Commands.AddToFavorites
 {
     internal sealed class AddProductToFavoritesCommandHandler : ICommandHandler<AddProductToFavoritesCommand>
     {
@@ -22,7 +21,7 @@ namespace AbySalto.Mid.Application.UserCommands.Users.Commands.Create
 
         public async Task<Result> Handle(AddProductToFavoritesCommand request, CancellationToken cancellationToken = default)
         {
-            var product = await _productRepository.GetByApiIdAsync(request.Id);
+            var product = await _productRepository.GetByApiIdAsync(request.Id, cancellationToken);
 
             if (product is null)
             {

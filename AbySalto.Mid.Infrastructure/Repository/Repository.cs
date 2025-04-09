@@ -72,7 +72,7 @@ namespace AbySalto.Mid.Infrastructure.Repository
 
         public void GetAddedEntity(T entity)
         {
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             dbSet.Entry(entity).GetDatabaseValues();
         }
     }

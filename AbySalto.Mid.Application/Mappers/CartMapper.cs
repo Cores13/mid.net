@@ -23,8 +23,9 @@ namespace AbySalto.Mid.Application.Mappers
         {
             return new CartResponseDto
             {
-                Id = (int)cart.Id,
-                Products = (List<CartProductResponseDto>)cart.Products?.ToCartProductDto(),
+                Id = cart.Id,
+                Products = cart.Products?.ToCartProductDto(),
+                //Products = (List<CartProductResponseDto>)cart.Products?.ToCartProductDto(),
                 Total = cart.Total,
                 DiscountedTotal = cart.DiscountedTotal,
                 UserId = cart.UserId,

@@ -1,11 +1,9 @@
-﻿using AbySalto.Mid.Domain.Entities;
-
-namespace AbySalto.Mid.Domain.DTOs.Responses
+﻿namespace AbySalto.Mid.Domain.DTOs.Responses
 {
     public class CartResponseDto
     {
-        public int Id { get; set; }
-        public List<CartProductResponseDto> Products { get; set; }
+        public int? Id { get; set; }
+        public ICollection<CartProductResponseDto?> Products { get; set; }
         public double Total { get; set; }
         public double DiscountedTotal { get; set; }
         public int UserId { get; set; }

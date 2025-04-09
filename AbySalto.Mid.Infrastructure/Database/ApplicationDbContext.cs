@@ -39,12 +39,13 @@ namespace AbySalto.Mid.Infrastructure.Database
                 .HasPrincipalKey(p => p.ApiId);
 
             modelBuilder.Entity<CartProduct>()
-                .HasKey(ci => new { ci.CartId, ci.ProductId });
+                .Property(cp => cp.Id)
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<CartProduct>()
-                .HasOne(ci => ci.Product)
+                .HasOne(cp => cp.Product)
                 .WithMany(p => p.CartProducts)
-                .HasForeignKey(ci => ci.ProductId)
+                .HasForeignKey(cp => cp.ProductId)
                 .HasPrincipalKey(p => p.ApiId);
 
             modelBuilder.Entity<CartProduct>()

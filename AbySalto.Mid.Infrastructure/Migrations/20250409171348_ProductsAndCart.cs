@@ -71,33 +71,32 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartProduct",
+                name: "CartProducts",
                 columns: table => new
                 {
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<double>(type: "float", nullable: false),
                     DiscountTotal = table.Column<double>(type: "float", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartProduct", x => new { x.CartId, x.ProductId });
+                    table.PrimaryKey("PK_CartProducts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartProduct_Carts_CartId",
+                        name: "FK_CartProducts_Carts_CartId",
                         column: x => x.CartId,
                         principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CartProduct_Products_ProductId",
+                        name: "FK_CartProducts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "ApiId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ApiId");
                 });
 
             migrationBuilder.CreateTable(
@@ -173,23 +172,54 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserFavorites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFavorites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserFavorites_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ApiId");
+                    table.ForeignKey(
+                        name: "FK_UserFavorites_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7529), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9176), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(9602), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(18), new DateTime(2025, 4, 9, 4, 28, 26, 838, DateTimeKind.Utc).AddTicks(7863) });
+                values: new object[] { new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(1583), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(3019), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(3404), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(3778), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(1854) });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "CreatedOn", "EmailVerifiedAt", "RefreshTokenExpiryTime", "ResetPasswordExpiry", "UpdatedOn" },
-                values: new object[] { new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1185), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1188), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1189), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1190), new DateTime(2025, 4, 9, 4, 28, 26, 839, DateTimeKind.Utc).AddTicks(1186) });
+                values: new object[] { new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(4787), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(4789), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(4790), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(4791), new DateTime(2025, 4, 9, 17, 13, 48, 65, DateTimeKind.Utc).AddTicks(4787) });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartProduct_ProductId",
-                table: "CartProduct",
+                name: "IX_CartProducts_CartId",
+                table: "CartProducts",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartProducts_ProductId",
+                table: "CartProducts",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -214,13 +244,23 @@ namespace AbySalto.Mid.Infrastructure.Migrations
                 name: "IX_Reviews_ProductId",
                 table: "Reviews",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFavorites_ProductId",
+                table: "UserFavorites",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFavorites_UserId",
+                table: "UserFavorites",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CartProduct");
+                name: "CartProducts");
 
             migrationBuilder.DropTable(
                 name: "Dimensions");
@@ -230,6 +270,9 @@ namespace AbySalto.Mid.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "UserFavorites");
 
             migrationBuilder.DropTable(
                 name: "Carts");

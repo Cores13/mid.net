@@ -1,7 +1,6 @@
-﻿using AbySalto.Mid.Application.UserCommands.Products.Commands.Create;
+﻿using AbySalto.Mid.Application.UserCommands.Products.Commands.AddToFavorites;
 using AbySalto.Mid.Application.UserCommands.Products.Queries.GetAll;
 using AbySalto.Mid.Application.UserCommands.Products.Queries.GetOne;
-using AbySalto.Mid.Application.UserCommands.Users.Queries.GetOne;
 using AbySalto.Mid.Domain.Core.Primitives;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
