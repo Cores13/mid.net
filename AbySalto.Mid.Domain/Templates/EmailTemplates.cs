@@ -10,7 +10,7 @@
             {
                 directory = directory.Parent;
             }
-            var path = Path.Combine(directory.FullName, "Authentication.Domain\\Templates").ToString();
+            var path = Path.Combine(directory.FullName, "AbySalto.Mid.Domain\\Templates").ToString();
             
             return path;
         }
