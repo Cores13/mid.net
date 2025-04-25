@@ -9,6 +9,7 @@ Ovaj projekat koristi modernu arhitekturu i obrasce dizajniranja kako bi stvorio
 - **Global Error Handling**
 - **Logging and Validation Pipelines**
 - **Unit of Work Pipeline**
+- **JWT autentifikacija sa refresh token mehanizmom**
 
 ## Tehničke specifikacije
 
@@ -36,6 +37,12 @@ Za praćenje i analizu rada sistema koristi se centralizovan **logging** sistem.
 
 ### 7. **Unit of Work**
 Implementiran je **Unit of Work** obrazac kako bi se obezbjedila koherentnost transakcija kroz različite slojeve aplikacije i omogućilo jednostavno praćenje svih promjena u jednoj transakciji.
+
+### 8. **JWT autentifikacija sa refresh token mehanizmom**
+Sistem koristi **JWT (JSON Web Token)** autentifikaciju za zaštitu API endpoint-a. Prilikom uspješne prijave, korisniku se generiše pristupni (access) token i **refresh token**.
+
+- **Access token** ima ograničen rok trajanja i koristi se za autentifikaciju korisnika kod svakog zahtjeva.
+- **Refresh token** se koristi za generisanje novog access tokena kada istekne prethodni, bez potrebe za ponovnim loginom.
 
 ## Uputstvo za podešavanje projekta
 
